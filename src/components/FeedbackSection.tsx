@@ -3,13 +3,14 @@
 import React, { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
 import { menuItems } from '../data/menuData';
-import { Mail, MessageSquare, Send, CheckCircle } from 'lucide-react';
+import { Mail, MessageSquare, Send, CheckCircle, Star } from 'lucide-react';
 
 export const FeedbackSection: React.FC = () => {
   const { setActiveSection } = useCart();
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [rating, setRating] = useState(5);
+  const [hoverRating, setHoverRating] = useState<number | null>(null);
   const [selectedBurger, setSelectedBurger] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -45,18 +46,16 @@ export const FeedbackSection: React.FC = () => {
     }, 1800);
   };
 
-  const getRatingLabel = (r: number) => {
-    switch (r) {
-      case 1: return { text: 'Terrible', bg: 'bg-red-600',    border: 'border-red-700' };
-      case 2: return { text: 'Bad',      bg: 'bg-orange-500', border: 'border-orange-600' };
-      case 3: return { text: 'Average',  bg: 'bg-yellow-400', border: 'border-yellow-500' };
-      case 4: return { text: 'Good',     bg: 'bg-lime-500',   border: 'border-lime-600' };
-      case 5: return { text: 'Incredible', bg: 'bg-emerald-500', border: 'border-emerald-600' };
-      default: return { text: '', bg: '', border: '' };
-    }
-  };
+  const RATING_OPTIONS = [
+    { value: 1, label: 'Awful', activeColor: 'text-red-500 fill-red-500', glowColor: 'rgba(239, 68, 68, 0.4)', badgeBg: 'bg-red-500/10 text-red-400 border-red-500/20' },
+    { value: 2, label: 'Meh', activeColor: 'text-orange-500 fill-orange-500', glowColor: 'rgba(249, 115, 22, 0.4)', badgeBg: 'bg-orange-500/10 text-orange-400 border-orange-500/20' },
+    { value: 3, label: 'Okay', activeColor: 'text-yellow-500 fill-yellow-500', glowColor: 'rgba(234, 179, 8, 0.4)', badgeBg: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20' },
+    { value: 4, label: 'Great', activeColor: 'text-lime-400 fill-lime-400', glowColor: 'rgba(163, 230, 53, 0.4)', badgeBg: 'bg-lime-500/10 text-lime-400 border-lime-500/20' },
+    { value: 5, label: 'Perfect', activeColor: 'text-emerald-400 fill-emerald-400', glowColor: 'rgba(52, 211, 153, 0.4)', badgeBg: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' },
+  ];
 
-  const ratingLabel = getRatingLabel(rating);
+  const activeRating = hoverRating ?? rating;
+  const activeOption = RATING_OPTIONS.find(o => o.value === activeRating)!;
 
   return (
     <section id="contact" className="py-24 pb-32 px-4 bg-[#fbbf24] text-zinc-950 relative">
@@ -75,7 +74,7 @@ export const FeedbackSection: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 bg-black text-white border-2 border-zinc-950 rounded-[2.5rem] p-6 md:p-10 shadow-[6px_6px_0px_#000] relative overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 bg-zinc-950 text-white border border-zinc-800 rounded-[2.5rem] p-6 md:p-10 shadow-2xl relative overflow-hidden">
           
           {/* Accent decoration */}
           <div className="absolute top-0 right-0 w-32 h-32 bg-[#ff2a14]/10 rounded-full blur-3xl pointer-events-none" />
@@ -110,7 +109,7 @@ export const FeedbackSection: React.FC = () => {
                   href="https://facebook.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2.5 rounded-full bg-zinc-900 hover:bg-[#ff2a14] text-zinc-300 hover:text-white border border-zinc-800 hover:border-zinc-950 transition-all duration-300 shadow-[1px_1px_0px_rgba(0,0,0,0.5)] hover:shadow-[2px_2px_0px_rgba(0,0,0,0.5)] hover:translate-x-[-0.5px] hover:translate-y-[-0.5px]"
+                  className="p-2.5 rounded-full bg-zinc-900 hover:bg-[#ff2a14] text-zinc-300 hover:text-white border border-zinc-800 hover:border-zinc-950 transition-all duration-300 shadow-md hover:-translate-y-0.5"
                   aria-label="Facebook"
                 >
                   <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -121,7 +120,7 @@ export const FeedbackSection: React.FC = () => {
                   href="https://instagram.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2.5 rounded-full bg-zinc-900 hover:bg-[#ff2a14] text-zinc-300 hover:text-white border border-zinc-800 hover:border-zinc-950 transition-all duration-300 shadow-[1px_1px_0px_rgba(0,0,0,0.5)] hover:shadow-[2px_2px_0px_rgba(0,0,0,0.5)] hover:translate-x-[-0.5px] hover:translate-y-[-0.5px]"
+                  className="p-2.5 rounded-full bg-zinc-900 hover:bg-[#ff2a14] text-zinc-300 hover:text-white border border-zinc-800 hover:border-zinc-950 transition-all duration-300 shadow-md hover:-translate-y-0.5"
                   aria-label="Instagram"
                 >
                   <svg className="w-4.5 h-4.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
@@ -138,16 +137,16 @@ export const FeedbackSection: React.FC = () => {
           <div className="md:col-span-3 border-t md:border-t-0 md:border-l border-zinc-800 pt-6 md:pt-0 md:pl-8">
             {isSubmitted ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-8 animate-fade-in">
-                <div className="w-16 h-16 bg-emerald-950 border-2 border-zinc-950 text-emerald-400 rounded-full flex items-center justify-center mb-4">
+                <div className="w-16 h-16 bg-emerald-950/50 border border-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(52,211,153,0.15)]">
                   <CheckCircle className="w-8 h-8" />
                 </div>
-                <h4 className="text-lg font-black text-emerald-400">THANK YOU!</h4>
+                <h4 className="text-lg font-black text-emerald-400 uppercase tracking-wider">THANK YOU!</h4>
                 <p className="text-xs text-zinc-400 mt-1.5 max-w-[240px] font-bold">
                   Your review has been successfully transmitted. We value your feedback!
                 </p>
                 <button
                   onClick={() => setIsSubmitted(false)}
-                  className="mt-6 px-6 py-2 bg-white hover:bg-zinc-100 border-2 border-zinc-950 text-xs font-black uppercase rounded-full tracking-wider transition-all shadow-[2px_2px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[1px_1px_0px_#000]"
+                  className="mt-6 px-6 py-2.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-850 text-xs font-black uppercase rounded-xl tracking-wider transition-all hover:scale-105 active:scale-95 text-white"
                 >
                   Send another message
                 </button>
@@ -155,7 +154,7 @@ export const FeedbackSection: React.FC = () => {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5 animate-fade-in">
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-black tracking-widest text-zinc-300 block uppercase">
+                  <label className="text-[10px] font-black tracking-widest text-zinc-400 block uppercase">
                     Your Email Address
                   </label>
                   <input
@@ -164,23 +163,23 @@ export const FeedbackSection: React.FC = () => {
                     placeholder="e.g., name@gmail.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full bg-white border-2 border-zinc-950 focus:border-[#ff2a14] focus:outline-none p-3.5 rounded-xl text-sm transition-all text-zinc-900 placeholder-zinc-400 shadow-[1px_1px_0px_#000] focus:shadow-[2px_2px_0px_#000] focus:translate-x-[-0.5px] focus:translate-y-[-0.5px]"
+                    className="w-full bg-zinc-900/60 border border-zinc-800 focus:border-[#ff2a14] focus:ring-2 focus:ring-[#ff2a14]/15 focus:outline-none p-3.5 rounded-xl text-sm transition-all text-white placeholder-zinc-500"
                   />
                 </div>
 
                 <div className="space-y-1.5 relative">
-                  <label className="text-[10px] font-black tracking-widest text-zinc-300 block uppercase">
+                  <label className="text-[10px] font-black tracking-widest text-zinc-400 block uppercase">
                     Favorite Burger / Item (Optional)
                   </label>
                   <div className="relative">
                     <select
                       value={selectedBurger}
                       onChange={(e) => setSelectedBurger(e.target.value)}
-                      className="w-full bg-white border-2 border-zinc-950 focus:border-[#ff2a14] focus:outline-none p-3.5 pr-10 rounded-xl text-sm transition-all text-zinc-900 shadow-[1px_1px_0px_#000] focus:shadow-[2px_2px_0px_#000] focus:translate-x-[-0.5px] focus:translate-y-[-0.5px] cursor-pointer font-bold appearance-none"
+                      className="w-full bg-zinc-900/60 border border-zinc-800 focus:border-[#ff2a14] focus:ring-2 focus:ring-[#ff2a14]/15 focus:outline-none p-3.5 pr-10 rounded-xl text-sm transition-all text-white cursor-pointer appearance-none"
                     >
-                      <option value="">-- Choose Food Item --</option>
+                      <option value="" className="bg-zinc-950 text-white">-- Choose Food Item --</option>
                       {menuItems.map((item) => (
-                        <option key={item.id} value={item.name}>
+                        <option key={item.id} value={item.name} className="bg-zinc-950 text-white">
                           {item.name}
                         </option>
                       ))}
@@ -191,37 +190,49 @@ export const FeedbackSection: React.FC = () => {
                   </div>
                 </div>
 
+                {/* Star rating picker - clean, interactive, modern */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <label className="text-[10px] font-black tracking-widest text-zinc-300 block uppercase">
-                      Burger Rating
+                    <label className="text-[10px] font-black tracking-widest text-zinc-400 block uppercase">
+                      How was it?
                     </label>
-                    {ratingLabel.text && (
-                      <span className={`text-[9px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full text-white border ${ratingLabel.bg} ${ratingLabel.border} select-none transition-all`}>
-                        {ratingLabel.text}
-                      </span>
-                    )}
+                    <span className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full border transition-all duration-300 ${activeOption.badgeBg}`}>
+                      {activeOption.label}
+                    </span>
                   </div>
-                  <div className="flex items-center gap-1.5 mt-1">
-                    {[1, 2, 3, 4, 5].map((n) => (
-                      <button
-                        key={n}
-                        type="button"
-                        onClick={() => setRating(n)}
-                        className={`flex-1 h-9 rounded-lg border-2 border-zinc-950 font-black text-xs transition-all shadow-[2px_2px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#000] active:translate-x-[0.5px] active:translate-y-[0.5px] active:shadow-[1px_1px_0px_#000] ${
-                          n <= rating
-                            ? 'bg-[#fbbf24] text-zinc-950'
-                            : 'bg-zinc-800 text-zinc-500 hover:bg-zinc-700'
-                        }`}
-                      >
-                        {n}
-                      </button>
-                    ))}
+                  <div className="flex items-center space-x-1 py-1">
+                    {[1, 2, 3, 4, 5].map((num) => {
+                      const isLit = num <= activeRating;
+                      let starStyle = 'text-zinc-700 fill-none';
+                      let filterStyle = undefined;
+
+                      if (isLit) {
+                        starStyle = activeOption.activeColor;
+                        filterStyle = { filter: `drop-shadow(0 0 6px ${activeOption.glowColor})` };
+                      }
+
+                      return (
+                        <button
+                          key={num}
+                          type="button"
+                          onClick={() => setRating(num)}
+                          onMouseEnter={() => setHoverRating(num)}
+                          onMouseLeave={() => setHoverRating(null)}
+                          className="p-1 transition-transform duration-150 hover:scale-125 active:scale-90 focus:outline-none"
+                          aria-label={`Rate ${num} stars`}
+                        >
+                          <Star
+                            style={filterStyle}
+                            className={`w-8 h-8 stroke-[1.5] transition-all duration-200 ${starStyle}`}
+                          />
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-black tracking-widest text-zinc-300 block uppercase">
+                  <label className="text-[10px] font-black tracking-widest text-zinc-400 block uppercase">
                     Message / Review
                   </label>
                   <textarea
@@ -231,7 +242,7 @@ export const FeedbackSection: React.FC = () => {
                     placeholder="How was the meat juiciness? Were the wings hot enough?"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    className="w-full bg-white border-2 border-zinc-950 focus:border-[#ff2a14] focus:outline-none p-3.5 rounded-xl text-sm transition-all text-zinc-900 placeholder-zinc-400 shadow-[1px_1px_0px_#000] focus:shadow-[2px_2px_0px_#000] focus:translate-x-[-0.5px] focus:translate-y-[-0.5px] resize-none"
+                    className="w-full bg-zinc-900/60 border border-zinc-800 focus:border-[#ff2a14] focus:ring-2 focus:ring-[#ff2a14]/15 focus:outline-none p-3.5 rounded-xl text-sm transition-all text-white placeholder-zinc-500 resize-none"
                   />
                   <div className="flex justify-between items-center text-[9px] font-extrabold uppercase tracking-wider text-zinc-500 px-1 mt-1">
                     <span>Max 300 characters</span>
@@ -244,12 +255,12 @@ export const FeedbackSection: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full h-11 bg-[#ff2a14] hover:bg-[#fbbf24] hover:text-zinc-950 disabled:bg-zinc-800 disabled:text-zinc-500 disabled:border-zinc-700 text-white font-black uppercase rounded-xl text-xs tracking-wider flex items-center justify-center space-x-2 border-2 border-zinc-950 shadow-[3px_3px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[4px_4px_0px_#000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[1px_1px_0px_#000] transition-all group overflow-hidden"
+                  className="w-full h-11 bg-[#ff2a14] hover:bg-[#e0220f] disabled:bg-zinc-800 disabled:text-zinc-500 text-white font-black uppercase rounded-xl text-xs tracking-wider flex items-center justify-center space-x-2 transition-all shadow-[0_4px_12px_rgba(255,42,20,0.2)] hover:shadow-[0_6px_20px_rgba(255,42,20,0.3)] active:scale-[0.98] group overflow-hidden"
                 >
                   {isSubmitting ? (
                     <div className="flex items-center space-x-2">
                       <span className="animate-pulse">Transmitting...</span>
-                      <Send className="w-3.5 h-3.5 animate-bounce text-[#ff2a14]" />
+                      <Send className="w-3.5 h-3.5 animate-bounce text-white/50" />
                     </div>
                   ) : (
                     <>
