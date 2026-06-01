@@ -175,7 +175,7 @@ export const BurgerExplode: React.FC = () => {
         {/* Outer UI Elements */}
         <div className="absolute top-[12%] left-1/2 -translate-x-1/2 text-center select-none pointer-events-none z-10">
           <p className="font-serif italic text-white/90 text-2xl tracking-wider select-none">
-            since 1980
+            since 2016
           </p>
         </div>
 
