@@ -22,6 +22,7 @@ export const MenuSection: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [filteredItems, setFilteredItems] = useState<MenuItem[]>(menuItems);
   const [addedItemId, setAddedItemId] = useState<string | null>(null);
+  const [visibleCount, setVisibleCount] = useState(6);
 
   // Search bar interactivity refs & states
   const searchInputRef = React.useRef<HTMLInputElement>(null);
@@ -170,6 +171,11 @@ export const MenuSection: React.FC = () => {
     setFilteredItems(result);
   }, [selectedCategory, searchQuery]);
 
+  // Reset visible item count when category or search changes
+  useEffect(() => {
+    setVisibleCount(6);
+  }, [selectedCategory, searchQuery]);
+
   // Quick add to cart with default options
   const handleQuickAdd = (item: MenuItem) => {
     addToCart(item);
@@ -296,7 +302,7 @@ export const MenuSection: React.FC = () => {
       </div>
 
       {/* Bottom Wave Divider (flowing into charcoal outlets section) */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
+      <div className="absolute bottom-[-2px] left-0 w-full overflow-hidden leading-none z-10 translate-y-[1px]">
         <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-full h-[45px] md:h-[65px] fill-black">
           <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V0H0V56.44Z" />
         </svg>
@@ -439,110 +445,127 @@ export const MenuSection: React.FC = () => {
             <p className="text-xs text-zinc-500 mt-1">Try another keyword or category filter!</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredItems.map((item) => (
-              <div
-                key={item.id}
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
-                style={{ transition: 'transform 0.1s ease, box-shadow 0.3s ease' }}
-                className="bg-white border-3 border-zinc-950 rounded-[2.5rem] p-6 flex flex-col justify-between relative overflow-hidden shadow-[6px_6px_0px_#000] hover:shadow-[10px_10px_0px_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-300 transform-gpu group"
-              >
-                <div>
-                  {/* Photo area */}
-                  <div className="h-48 rounded-[2rem] bg-zinc-50 border border-zinc-950/5 flex items-center justify-center relative overflow-hidden mb-6 select-none">
-                    {/* Visual round plate glow */}
-                    <div className="absolute w-36 h-36 rounded-full bg-gradient-to-br from-amber-100 to-amber-200/40 opacity-80 group-hover:scale-105 transition-transform duration-300" />
-                    
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      style={{ transition: 'transform 0.15s ease' }}
-                      className="parallax-img w-full h-full object-cover transform-gpu z-10"
-                    />
-                    
-                    {/* Badge tags */}
-                    {item.tags && item.tags.length > 0 && (
-                      <div className="absolute top-4 left-4 flex flex-wrap gap-1.5 z-20">
-                        {item.tags.map((tag, tIdx) => {
-                          const style = getTagStyle(tag);
-                          return (
-                            <span
-                              key={tIdx}
-                              className={`text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-lg flex items-center shadow-sm select-none ${style.className}`}
-                            >
-                              {style.icon}
-                              {tag}
-                            </span>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Header metadata */}
-                  <div className="flex justify-between items-start space-x-2 px-1">
-                    <h3 className="text-xl font-black tracking-tight uppercase leading-tight text-zinc-950 font-display group-hover:text-[#ff2a14] transition-colors">
-                      {item.name}
-                    </h3>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-zinc-500 text-xs mt-2.5 leading-relaxed line-clamp-2 px-1">
-                    {item.description}
-                  </p>
-                </div>
-
-                {/* Pricing & Add to Cart footer */}
-                <div className="flex flex-col border-t border-zinc-950/5 pt-4 mt-6">
-                  <div className="flex items-center justify-between mb-4 px-1">
-                    <div className="flex flex-col">
-                      <span className="text-[9px] text-zinc-400 uppercase tracking-widest font-extrabold">Base Price</span>
-                      <span className="text-2xl font-black text-[#ff2a14]">Tk {item.price}</span>
+          <div className="space-y-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {(selectedCategory === 'all'
+                ? filteredItems.slice(0, visibleCount)
+                : filteredItems
+              ).map((item) => (
+                <div
+                  key={item.id}
+                  onMouseMove={handleMouseMove}
+                  onMouseLeave={handleMouseLeave}
+                  style={{ transition: 'transform 0.1s ease, box-shadow 0.3s ease' }}
+                  className="bg-white border-3 border-zinc-950 rounded-[2.5rem] p-6 flex flex-col justify-between relative overflow-hidden shadow-[6px_6px_0px_#000] hover:shadow-[10px_10px_0px_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-300 transform-gpu group"
+                >
+                  <div>
+                    {/* Photo area */}
+                    <div className="h-48 rounded-[2rem] bg-zinc-50 border border-zinc-950/5 flex items-center justify-center relative overflow-hidden mb-6 select-none">
+                      {/* Visual round plate glow */}
+                      <div className="absolute w-36 h-36 rounded-full bg-gradient-to-br from-amber-100 to-amber-200/40 opacity-80 group-hover:scale-105 transition-transform duration-300" />
+                      
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        style={{ transition: 'transform 0.15s ease' }}
+                        className="parallax-img w-full h-full object-cover transform-gpu z-10"
+                      />
+                      
+                      {/* Badge tags */}
+                      {item.tags && item.tags.length > 0 && (
+                        <div className="absolute top-4 left-4 flex flex-wrap gap-1.5 z-20">
+                          {item.tags.map((tag, tIdx) => {
+                            const style = getTagStyle(tag);
+                            return (
+                              <span
+                                key={tIdx}
+                                className={`text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-lg flex items-center shadow-sm select-none ${style.className}`}
+                              >
+                                {style.icon}
+                                {tag}
+                              </span>
+                            );
+                          })}
+                        </div>
+                      )}
                     </div>
 
-                    {item.calories && (
-                      <span className="text-[10px] bg-zinc-100 text-zinc-600 px-2.5 py-1 rounded-lg font-bold font-sans">
-                        {item.calories} kcal
-                      </span>
-                    )}
+                    {/* Header metadata */}
+                    <div className="flex justify-between items-start space-x-2 px-1">
+                      <h3 className="text-xl font-black tracking-tight uppercase leading-tight text-zinc-950 font-display group-hover:text-[#ff2a14] transition-colors">
+                        {item.name}
+                      </h3>
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-zinc-500 text-xs mt-2.5 leading-relaxed line-clamp-2 px-1">
+                      {item.description}
+                    </p>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-3">
-                    {/* Quick Add Button */}
-                    <button
-                      onClick={() => handleQuickAdd(item)}
-                      className={`h-11 rounded-2xl font-black text-xs uppercase tracking-wider flex items-center justify-center space-x-1.5 border-2 border-zinc-950 transition-all ${
-                        addedItemId === item.id
-                          ? 'bg-emerald-500 text-white border-zinc-950 shadow-[2px_2px_0px_#000]'
-                          : 'bg-white hover:bg-zinc-50 text-zinc-900 shadow-[2px_2px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[1px_1px_0px_#000]'
-                      }`}
-                    >
-                      {addedItemId === item.id ? (
-                        <>
-                          <Check className="w-4 h-4 stroke-[3px]" />
-                          <span>Added</span>
-                        </>
-                      ) : (
-                        <>
-                          <ShoppingBag className="w-4 h-4" />
-                          <span>Quick Add</span>
-                        </>
-                      )}
-                    </button>
+                  {/* Pricing & Add to Cart footer */}
+                  <div className="flex flex-col border-t border-zinc-950/5 pt-4 mt-6">
+                    <div className="flex items-center justify-between mb-4 px-1">
+                      <div className="flex flex-col">
+                        <span className="text-[9px] text-zinc-400 uppercase tracking-widest font-extrabold">Base Price</span>
+                        <span className="text-2xl font-black text-[#ff2a14]">Tk {item.price}</span>
+                      </div>
 
-                    {/* Customize Button */}
-                    <button
-                      onClick={() => handleOpenCustomize(item)}
-                      className="h-11 bg-amber-400 hover:bg-amber-300 text-zinc-950 rounded-2xl font-black text-xs uppercase tracking-wider flex items-center justify-center space-x-1.5 border-2 border-zinc-950 shadow-[2px_2px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[1px_1px_0px_#000] transition-all"
-                    >
-                      <Settings className="w-4 h-4" />
-                      <span>Customize</span>
-                    </button>
+                      {item.calories && (
+                        <span className="text-[10px] bg-zinc-100 text-zinc-600 px-2.5 py-1 rounded-lg font-bold font-sans">
+                          {item.calories} kcal
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      {/* Quick Add Button */}
+                      <button
+                        onClick={() => handleQuickAdd(item)}
+                        className={`h-11 rounded-2xl font-black text-xs uppercase tracking-wider flex items-center justify-center space-x-1.5 border-2 border-zinc-950 transition-all ${
+                          addedItemId === item.id
+                            ? 'bg-emerald-500 text-white border-zinc-950 shadow-[2px_2px_0px_#000]'
+                            : 'bg-white hover:bg-zinc-50 text-zinc-900 shadow-[2px_2px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[1px_1px_0px_#000]'
+                        }`}
+                      >
+                        {addedItemId === item.id ? (
+                          <>
+                            <Check className="w-4 h-4 stroke-[3px]" />
+                            <span>Added</span>
+                          </>
+                        ) : (
+                          <>
+                            <ShoppingBag className="w-4 h-4" />
+                            <span>Quick Add</span>
+                          </>
+                        )}
+                      </button>
+
+                      {/* Customize Button */}
+                      <button
+                        onClick={() => handleOpenCustomize(item)}
+                        className="h-11 bg-amber-400 hover:bg-amber-300 text-zinc-950 rounded-2xl font-black text-xs uppercase tracking-wider flex items-center justify-center space-x-1.5 border-2 border-zinc-950 shadow-[2px_2px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[1px_1px_0px_#000] transition-all"
+                      >
+                        <Settings className="w-4 h-4" />
+                        <span>Customize</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
+              ))}
+            </div>
+
+            {selectedCategory === 'all' && filteredItems.length > visibleCount && (
+              <div className="flex justify-center mt-12">
+                <button
+                  type="button"
+                  onClick={() => setVisibleCount((prev) => prev + 6)}
+                  className="px-8 py-3.5 bg-zinc-950 hover:bg-[#ff2a14] text-white font-black uppercase text-xs rounded-2xl border-2 border-zinc-950 hover:border-[#ff2a14] shadow-[4px_4px_0px_#000] hover:shadow-[6px_6px_0px_#000] hover:translate-x-[-1.5px] hover:translate-y-[-1.5px] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[2px_2px_0px_#000] transition-all duration-200 cursor-pointer"
+                >
+                  Load More Items
+                </button>
               </div>
-            ))}
+            )}
           </div>
         )}
       </div>

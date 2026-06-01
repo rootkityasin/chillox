@@ -168,7 +168,7 @@ export const OrderTracker: React.FC = () => {
               </h3>
               <div className="max-h-40 overflow-y-auto space-y-2 pr-1">
                 {orderState.items.map((cartItem) => (
-                  <div key={cartItem.item.id} className="flex justify-between items-center text-sm">
+                  <div key={cartItem.cartItemId} className="flex justify-between items-center text-sm">
                     <span className="text-white/80 font-medium">
                       {cartItem.item.name} <span className="text-amber-400 font-bold">x{cartItem.quantity}</span>
                     </span>
