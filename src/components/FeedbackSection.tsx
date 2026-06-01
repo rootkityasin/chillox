@@ -47,18 +47,12 @@ export const FeedbackSection: React.FC = () => {
 
   const getRatingLabel = (r: number) => {
     switch (r) {
-      case 1:
-        return { text: 'Terrible', emoji: '😡', color: 'text-red-600' };
-      case 2:
-        return { text: 'Bad', emoji: '😞', color: 'text-orange-500' };
-      case 3:
-        return { text: 'Average', emoji: '😐', color: 'text-yellow-600' };
-      case 4:
-        return { text: 'Good', emoji: '🙂', color: 'text-lime-600' };
-      case 5:
-        return { text: 'Incredible!', emoji: '🍔🔥', color: 'text-emerald-600 animate-pulse' };
-      default:
-        return { text: '', emoji: '', color: '' };
+      case 1: return { text: 'Terrible', bg: 'bg-red-600',    border: 'border-red-700' };
+      case 2: return { text: 'Bad',      bg: 'bg-orange-500', border: 'border-orange-600' };
+      case 3: return { text: 'Average',  bg: 'bg-yellow-400', border: 'border-yellow-500' };
+      case 4: return { text: 'Good',     bg: 'bg-lime-500',   border: 'border-lime-600' };
+      case 5: return { text: 'Incredible', bg: 'bg-emerald-500', border: 'border-emerald-600' };
+      default: return { text: '', bg: '', border: '' };
     }
   };
 
@@ -197,28 +191,32 @@ export const FeedbackSection: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-black tracking-widest text-zinc-300 block uppercase">
-                    Burger Rating
-                  </label>
-                  <div className="flex items-center space-x-2 mt-1">
-                    <div className="flex items-center space-x-0.5">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <button
-                          key={star}
-                          type="button"
-                          onClick={() => setRating(star)}
-                          className={`text-2xl transition-transform hover:scale-110 p-0.5 ${
-                            star <= rating ? 'text-[#fbbf24] font-bold' : 'text-zinc-700'
-                          }`}
-                        >
-                          ★
-                        </button>
-                      ))}
-                    </div>
-                    <span className={`text-[10px] font-black uppercase tracking-wider ${ratingLabel.color} ml-1 select-none`}>
-                      {ratingLabel.emoji} {ratingLabel.text}
-                    </span>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <label className="text-[10px] font-black tracking-widest text-zinc-300 block uppercase">
+                      Burger Rating
+                    </label>
+                    {ratingLabel.text && (
+                      <span className={`text-[9px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full text-white border ${ratingLabel.bg} ${ratingLabel.border} select-none transition-all`}>
+                        {ratingLabel.text}
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-1.5 mt-1">
+                    {[1, 2, 3, 4, 5].map((n) => (
+                      <button
+                        key={n}
+                        type="button"
+                        onClick={() => setRating(n)}
+                        className={`flex-1 h-9 rounded-lg border-2 border-zinc-950 font-black text-xs transition-all shadow-[2px_2px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#000] active:translate-x-[0.5px] active:translate-y-[0.5px] active:shadow-[1px_1px_0px_#000] ${
+                          n <= rating
+                            ? 'bg-[#fbbf24] text-zinc-950'
+                            : 'bg-zinc-800 text-zinc-500 hover:bg-zinc-700'
+                        }`}
+                      >
+                        {n}
+                      </button>
+                    ))}
                   </div>
                 </div>
 
