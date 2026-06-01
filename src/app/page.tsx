@@ -51,7 +51,7 @@ export default function Home() {
       <footer className="bg-black border-t border-white/10 py-10 px-4 text-center text-xs text-white/40">
         <div className="max-w-7xl mx-auto space-y-4">
           <p className="max-w-md mx-auto leading-relaxed select-none">
-            © {new Date().getFullYear()} Chillox Bangladesh. All rights reserved.
+            © 2016–{new Date().getFullYear()} Chillox Bangladesh. All rights reserved.
           </p>
           <div className="h-[1px] bg-white/5 max-w-xs mx-auto" />
         </div>
