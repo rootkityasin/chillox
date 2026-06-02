@@ -8,14 +8,44 @@ export const Navbar: React.FC = () => {
   const { cartCount, setCartOpen, activeSection, setActiveSection } = useCart();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
+    let lastScrollY = typeof window !== 'undefined' ? window.scrollY : 0;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 50);
+
+      if (isMobileMenuOpen) {
+        setIsVisible(true);
+        return;
+      }
+
+      // Determine the threshold: start of section 3 (#menu)
+      const menuElement = document.getElementById('menu');
+      const threshold = menuElement ? menuElement.offsetTop - 120 : 800; // fallback to 800px
+
+      if (currentScrollY <= threshold) {
+        // Always visible before the 3rd section
+        setIsVisible(true);
+      } else {
+        // Past the 2nd section: hide when scrolling down, show when scrolling up
+        if (currentScrollY > lastScrollY) {
+          // Scrolling down
+          setIsVisible(false);
+        } else {
+          // Scrolling up
+          setIsVisible(true);
+        }
+      }
+
+      lastScrollY = currentScrollY;
     };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isMobileMenuOpen]);
 
   const navItems = [
     { id: 'home', label: 'Home' },
@@ -47,7 +77,9 @@ export const Navbar: React.FC = () => {
 
   return (
     <header
-      className={`fixed transition-all duration-300 z-40 top-4 left-1/2 -translate-x-1/2 w-[92%] max-w-5xl rounded-[2rem] bg-white border-2 border-zinc-950 shadow-[4px_4px_0px_#000] py-3 px-4 md:px-6`}
+      className={`fixed transition-all duration-300 z-40 left-1/2 -translate-x-1/2 w-[92%] max-w-5xl rounded-[2rem] bg-white border-2 border-zinc-950 shadow-[4px_4px_0px_#000] py-3 px-4 md:px-6 ${
+        isVisible ? 'top-4 opacity-100' : '-top-24 opacity-0 pointer-events-none'
+      }`}
     >
       <div className="w-full flex items-center justify-between">
         

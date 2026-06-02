@@ -176,6 +176,24 @@ export const MenuSection: React.FC = () => {
     setVisibleCount(6);
   }, [selectedCategory, searchQuery]);
 
+  // Lock body scroll when customization modal is open to prevent background scrolling
+  useEffect(() => {
+    if (customizingItem) {
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = 'hidden';
+      if (scrollbarWidth > 0) {
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
+      }
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    };
+  }, [customizingItem]);
+
   // Quick add to cart with default options
   const handleQuickAdd = (item: MenuItem) => {
     addToCart(item);
@@ -253,6 +271,20 @@ export const MenuSection: React.FC = () => {
   // 3D Parallax Tilt mouse handlers
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
+
+    // Check if the user is hovering over interactive buttons or the footer
+    const target = e.target as HTMLElement;
+    if (target.closest('.card-footer') || target.tagName === 'BUTTON' || target.closest('button')) {
+      // Reset card transform and exit so buttons are fully clickable and stable
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      card.style.boxShadow = '';
+      const img = card.querySelector('.parallax-img') as HTMLImageElement;
+      if (img) {
+        img.style.transform = 'translate3d(0, 0, 0) scale(1)';
+      }
+      return;
+    }
+
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -268,7 +300,8 @@ export const MenuSection: React.FC = () => {
 
     const img = card.querySelector('.parallax-img') as HTMLImageElement;
     if (img) {
-      img.style.transform = `translate3d(${(x - centerX) * 0.08}px, ${(y - centerY) * 0.08}px, 25px) scale(1.08)`;
+      // 3D pop-out rising towards the mouse
+      img.style.transform = `translate3d(${(x - centerX) * 0.12}px, ${(y - centerY) * 0.12 - 16}px, 50px) scale(1.25)`;
     }
   };
 
@@ -456,38 +489,17 @@ export const MenuSection: React.FC = () => {
                   onMouseMove={handleMouseMove}
                   onMouseLeave={handleMouseLeave}
                   style={{ transition: 'transform 0.1s ease, box-shadow 0.3s ease' }}
-                  className="bg-white border-3 border-zinc-950 rounded-[2.5rem] p-6 flex flex-col justify-between relative overflow-hidden shadow-[6px_6px_0px_#000] hover:shadow-[10px_10px_0px_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-300 transform-gpu group"
+                  className="bg-white border-3 border-zinc-950 rounded-[2.5rem] p-6 flex flex-col justify-between relative shadow-[6px_6px_0px_#000] hover:shadow-[10px_10px_0px_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-300 transform-gpu group [transform-style:preserve-3d]"
                 >
                   <div>
-                    {/* Photo area */}
-                    <div className="h-48 rounded-[2rem] bg-zinc-50 border border-zinc-950/5 flex items-center justify-center relative overflow-hidden mb-6 select-none">
-                      {/* Visual round plate glow */}
-                      <div className="absolute w-36 h-36 rounded-full bg-gradient-to-br from-amber-100 to-amber-200/40 opacity-80 group-hover:scale-105 transition-transform duration-300" />
-                      
+                    {/* Bounding box for image (no overflow-hidden, so pop-out works!) */}
+                    <div className="h-48 bg-[#ff2a14] border-b-2 border-zinc-950 flex items-center justify-center relative mb-6 select-none -mx-6 -mt-6 rounded-t-[2.2rem] rounded-b-[2rem]">
                       <img
                         src={item.image}
                         alt={item.name}
-                        style={{ transition: 'transform 0.15s ease' }}
-                        className="parallax-img w-full h-full object-cover transform-gpu z-10"
+                        className="parallax-img w-full h-full object-contain p-3.5 z-10 filter drop-shadow-[0_6px_12px_rgba(0,0,0,0.12)] group-hover:drop-shadow-[0_20px_35px_rgba(0,0,0,0.25)] pointer-events-none"
+                        style={{ transformStyle: 'preserve-3d', transition: 'transform 0.15s ease-out' }}
                       />
-                      
-                      {/* Badge tags */}
-                      {item.tags && item.tags.length > 0 && (
-                        <div className="absolute top-4 left-4 flex flex-wrap gap-1.5 z-20">
-                          {item.tags.map((tag, tIdx) => {
-                            const style = getTagStyle(tag);
-                            return (
-                              <span
-                                key={tIdx}
-                                className={`text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-lg flex items-center shadow-sm select-none ${style.className}`}
-                              >
-                                {style.icon}
-                                {tag}
-                              </span>
-                            );
-                          })}
-                        </div>
-                      )}
                     </div>
 
                     {/* Header metadata */}
@@ -497,14 +509,35 @@ export const MenuSection: React.FC = () => {
                       </h3>
                     </div>
 
-                    {/* Description */}
-                    <p className="text-zinc-500 text-xs mt-2.5 leading-relaxed line-clamp-2 px-1">
-                      {item.description}
-                    </p>
+                    {/* Description & Badge Tags Row */}
+                    <div className="flex justify-between items-start space-x-3 mt-2.5 px-1">
+                      {/* Description */}
+                      <p className="text-zinc-500 text-xs leading-relaxed line-clamp-2 flex-grow">
+                        {item.description}
+                      </p>
+
+                      {/* Badge tags */}
+                      {item.tags && item.tags.length > 0 && (
+                        <div className="flex flex-col gap-1 items-end flex-shrink-0">
+                          {item.tags.map((tag, tIdx) => {
+                            const style = getTagStyle(tag);
+                            return (
+                              <span
+                                key={tIdx}
+                                className={`text-[8px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-md flex items-center shadow-sm select-none whitespace-nowrap ${style.className}`}
+                              >
+                                {style.icon}
+                                {tag}
+                              </span>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
                   </div>
 
                   {/* Pricing & Add to Cart footer */}
-                  <div className="flex flex-col border-t border-zinc-950/5 pt-4 mt-6">
+                  <div className="card-footer flex flex-col border-t border-zinc-950/5 pt-4 mt-6 z-30 relative">
                     <div className="flex items-center justify-between mb-4 px-1">
                       <div className="flex flex-col">
                         <span className="text-[9px] text-zinc-400 uppercase tracking-widest font-extrabold">Base Price</span>
@@ -594,7 +627,7 @@ export const MenuSection: React.FC = () => {
             <div className="md:w-[40%] bg-[#faf6ed]/20 flex flex-col justify-start border-b md:border-b-0 md:border-r-2 border-zinc-950/10 relative overflow-hidden select-none">
               
               {/* Product Hero Image Area */}
-              <div className="w-full h-48 md:h-72 relative overflow-hidden bg-zinc-50 border-b border-zinc-950/10 flex-shrink-0">
+              <div className="w-full h-48 md:h-72 relative overflow-hidden bg-[#ff2a14] border-b-2 border-zinc-950 flex-shrink-0">
                 <img
                   src={customizingItem.image}
                   alt={customizingItem.name}

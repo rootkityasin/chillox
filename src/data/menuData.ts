@@ -126,6 +126,16 @@ export const menuItems: MenuItem[] = [
 
   // Smashers
   {
+    id: 'smasher-amul',
+    name: 'Amul',
+    price: 395,
+    category: 'smasher',
+    description: 'Vibrant double smashed beef patties loaded with double melted cheddar, pickles, and our signature secret smash sauce.',
+    image: '/burger_all.png',
+    tags: ['Secret Recipe', 'Double Melt 🔥'],
+    calories: 780
+  },
+  {
     id: 'smasher-truffle',
     name: 'Truffle Smasher',
     price: 425,

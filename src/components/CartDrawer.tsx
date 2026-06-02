@@ -24,6 +24,23 @@ export const CartDrawer: React.FC = () => {
   const [address, setAddress] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('cod'); // 'cod' | 'bkash' | 'card'
 
+  React.useEffect(() => {
+    if (isCartOpen) {
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = 'hidden';
+      if (scrollbarWidth > 0) {
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
+      }
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    };
+  }, [isCartOpen]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !phone || !address) {
