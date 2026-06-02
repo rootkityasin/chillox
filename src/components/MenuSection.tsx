@@ -125,15 +125,15 @@ export const MenuSection: React.FC = () => {
   const [selectedAddOns, setSelectedAddOns] = useState<{ name: string; price: number }[]>([]);
 
   const categories = [
-    { id: 'all', label: 'All Items' },
-    { id: 'beef', label: 'Beef Burgers' },
-    { id: 'chicken', label: 'Chicken Burgers' },
-    { id: 'fish', label: 'Fish Burgers' },
-    { id: 'smasher', label: 'Smashers' },
-    { id: 'rice-bowls', label: 'Rice Bowls' },
+    { id: 'all', label: 'All Platters' },
+    { id: 'beef', label: 'Beef e Boss!' },
+    { id: 'chicken', label: 'Chicken Lover?' },
+    { id: 'fish', label: 'Crispy Fish' },
+    { id: 'smasher', label: 'Smashed and Proud!' },
+    { id: 'rice-bowls', label: 'Rice Bowler\'s Club!' },
     { id: 'fried-chicken', label: 'Fried Chicken' },
-    { id: 'sides', label: 'Sides' },
-    { id: 'drinks', label: 'Shakes & Desserts' },
+    { id: 'sides', label: 'Messy Sides' },
+    { id: 'drinks', label: 'Sweet Shakes' },
   ];
 
   // Monitor scroll entry to activate navigation states
@@ -244,7 +244,7 @@ export const MenuSection: React.FC = () => {
 
   const getTagStyle = (tag: string) => {
     const t = tag.toLowerCase();
-    if (t.includes('spicy') || t.includes('🔥') || t.includes('🌶️') || t.includes('fiery') || t.includes('naga')) {
+    if (t.includes('spicy') || t.includes('fiery') || t.includes('naga')) {
       return {
         icon: <Flame className="w-3 h-3 mr-1 text-red-500 animate-pulse" />,
         className: "bg-red-50/95 text-red-600 border border-red-200/50"
@@ -351,8 +351,8 @@ export const MenuSection: React.FC = () => {
           <h2 className="text-4xl md:text-5xl font-black mt-4 tracking-wide uppercase text-zinc-950 font-display">
             EXPLORE THE <span className="text-[#ff2a14]">CHILLOX MENU</span>
           </h2>
-          <p className="text-zinc-600 text-sm max-w-lg mx-auto mt-3">
-            Order our famous beef cheese blast burgers, crispy smasher burgers, and loaded sides. Customize your spice level and bun toppings below!
+          <p className="text-zinc-700 text-sm max-w-lg mx-auto mt-3 font-semibold">
+            Bhai, cheese pull lagbe naki double decker beef block? Slicing through our Cheese Blast, Smasher burgers, or spicy Naga Drums is pure therapy! Customize spice level and toppings below!
           </p>
         </div>
 
@@ -736,7 +736,7 @@ export const MenuSection: React.FC = () => {
                                 : 'bg-white border-zinc-950/10 text-zinc-700 hover:bg-zinc-50'
                             }`}
                           >
-                            {sLevel === 'naga' ? 'Naga 🔥' : sLevel}
+                            {sLevel === 'naga' ? 'Naga' : sLevel}
                           </button>
                         ))}
                       </div>

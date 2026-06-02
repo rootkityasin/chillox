@@ -1,0 +1,414 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), sans-serif;
+  --font-display: var(--font-outfit), sans-serif;
+  --font-pacifico: var(--font-pacifico), cursive;
+}
+
+/* Custom CSS Keyframe Animations & Utilities */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-spin-slow {
+  animation: spinSlow 8s linear infinite;
+}
+
+/* Custom hiding scrollbar */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display), sans-serif;
+}
+
+/* Custom Word Interactive Animations */
+@keyframes smashBlast {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+    opacity: 1;
+    filter: blur(0px);
+  }
+  15% {
+    transform: translate(0, 0) scale(1.15) rotate(-8deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) scale(0) rotate(var(--dr));
+    opacity: 0;
+    filter: blur(4px);
+  }
+}
+
+.smash-active {
+  animation: smashBlast 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes flyAround {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+  15% {
+    transform: translate3d(15vw, -20vh, 0) rotate(90deg) scale(0.85);
+  }
+  30% {
+    transform: translate3d(35vw, 15vh, 0) rotate(180deg) scale(0.7);
+  }
+  45% {
+    transform: translate3d(10vw, 35vh, 0) rotate(270deg) scale(0.5);
+  }
+  60% {
+    transform: translate3d(-25vw, 20vh, 0) rotate(360deg) scale(0.65);
+  }
+  75% {
+    transform: translate3d(-35vw, -15vh, 0) rotate(450deg) scale(0.8);
+  }
+  90% {
+    transform: translate3d(-10vw, -30vh, 0) rotate(540deg) scale(0.9);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(720deg) scale(1);
+  }
+}
+
+.animate-fly-around {
+  animation: flyAround 3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Shake animation during bite prep */
+@keyframes biteShake {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  20%, 60% { transform: translate3d(-3px, 2px, 0); }
+  40%, 80% { transform: translate3d(3px, -2px, 0); }
+}
+.animate-shake {
+  animation: biteShake 0.12s ease-in-out infinite;
+}
+
+/* Breadcrumbs flying keyframes */
+@keyframes crumbFly {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--vx), var(--vy), 0) scale(0) rotate(180deg);
+    opacity: 0;
+  }
+}
+.animate-crumb {
+  animation: crumbFly 0.6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+
+/* Fullscreen Mayonnaise Splat Blast Animation */
+@keyframes mayoSplat {
+  0% {
+    transform: translate3d(-50%, -50%, 0) scale(0) rotate(var(--r));
+    opacity: 0;
+  }
+  15% {
+    transform: translate3d(-50%, -50%, 0) scale(1.15) rotate(var(--r));
+    opacity: 1;
+  }
+  25% {
+    transform: translate3d(-50%, -50%, 0) scale(1) rotate(var(--r));
+    opacity: 1;
+  }
+  80% {
+    transform: translate3d(-50%, calc(-50% + 15px), 0) scale(1) rotate(var(--r));
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(-50%, calc(-50% + 40px), 0) scale(0.6) rotate(var(--r));
+    opacity: 0;
+  }
+}
+.animate-mayo-splat {
+  animation: mayoSplat 3.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Sauce/Ketchup splatter blast keyframes */
+@keyframes sauceFly {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(var(--rot));
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--vx), var(--vy), 0) scale(0) rotate(var(--rot));
+    opacity: 0;
+  }
+}
+.animate-sauce {
+  animation: sauceFly 0.65s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+
+/* Tomato Floating and Shaking Animations */
+@keyframes floatLeft {
+  0%, 100% {
+    transform: translateY(-50%) translateX(0px) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-54%) translateX(6px) rotate(4deg);
+  }
+}
+@keyframes floatRight {
+  0%, 100% {
+    transform: translateY(-50%) translateX(0px) rotate(4deg);
+  }
+  50% {
+    transform: translateY(-46%) translateX(-6px) rotate(-4deg);
+  }
+}
+@keyframes tomatoShake {
+  0%, 100% {
+    transform: translateY(-50%) scale(1) rotate(0deg);
+  }
+  20%, 60% {
+    transform: translateY(-50%) scale(1.15) rotate(-10deg);
+  }
+  40%, 80% {
+    transform: translateY(-50%) scale(1.15) rotate(10deg);
+  }
+}
+.animate-float-left {
+  animation: floatLeft 5s ease-in-out infinite;
+}
+.animate-float-right {
+  animation: floatRight 5s ease-in-out infinite;
+}
+.animate-tomato-shake {
+  animation: tomatoShake 0.15s ease-in-out infinite;
+}
+
+/* Large Side Tomato Splat Blast Animation */
+@keyframes tomatoBigSplat {
+  0% {
+    transform: translate3d(-50%, -50%, 0) scale(0) rotate(var(--r));
+    opacity: 0;
+  }
+  15% {
+    transform: translate3d(-50%, -50%, 0) scale(1.15) rotate(var(--r));
+    opacity: 1;
+  }
+  25% {
+    transform: translate3d(-50%, -50%, 0) scale(1) rotate(var(--r));
+    opacity: 1;
+  }
+  80% {
+    transform: translate3d(-50%, calc(-50% + 15px), 0) scale(1) rotate(var(--r));
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(-50%, calc(-50% + 40px), 0) scale(0.6) rotate(var(--r));
+    opacity: 0;
+  }
+}
+.animate-tomato-big-splat {
+  animation: tomatoBigSplat 3.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Smashed Tomato Shatter/Smash Animation */
+@keyframes tomatoShatter {
+  0% {
+    transform: translateY(-50%) scale(0.4);
+    opacity: 0;
+  }
+  10% {
+    transform: translateY(-50%) scale(1.15);
+    opacity: 1;
+  }
+  20% {
+    transform: translateY(-50%) scale(1);
+    opacity: 1;
+  }
+  85% {
+    transform: translateY(-50%) scale(1.02);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(35px) scale(0.85);
+    opacity: 0;
+  }
+}
+.animate-tomato-shatter {
+  animation: tomatoShatter 2.2s cubic-bezier(0.175, 0.885, 0.32, 1.2) forwards;
+}
+
+.cursive-shadow {
+  text-shadow: 1px 1px 0px #000, -1px -1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000, 2px 3px 0px rgba(0,0,0,0.55);
+}
+
+@media (min-width: 768px) {
+  .cursive-shadow {
+    text-shadow: 2px 2px 0px #000, -2px -2px 0px #000, 2px -2px 0px #000, -2px 2px 0px #000, 4px 8px 0px rgba(0,0,0,0.6);
+  }
+}
+
+/* Custom Modal Animations */
+@keyframes floatBurger {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(2deg);
+  }
+}
+
+@keyframes burgerShadow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(0.8);
+    opacity: 0.2;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    transform: scale(0.9);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.8;
+  }
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-float-burger {
+  animation: floatBurger 4s ease-in-out infinite;
+}
+
+.animate-burger-shadow {
+  animation: burgerShadow 4s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 6s ease-in-out infinite;
+}
+
+.animate-slide-up-fade {
+  animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes glowMove {
+  0% {
+    left: -5%;
+  }
+  50% {
+    left: calc(100% - 6.5rem);
+  }
+  100% {
+    left: -5%;
+  }
+}
+
+.animate-glow-move {
+  animation: glowMove 8s ease-in-out infinite;
+}
+
+/* Custom Modern Scrollbar */
+::-webkit-scrollbar,
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track,
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: #faf6ed;
+}
+
+::-webkit-scrollbar-thumb,
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background: #000000;
+  border: 2px solid #faf6ed;
+  border-radius: 9999px;
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover,
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+  background: #ff2a14;
+}
+
+/* For Firefox */
+*, html, body {
+  scrollbar-width: thin;
+  scrollbar-color: #000000 #faf6ed;
+}
+
+/* Horizontal scroll fade out masks */
+.scroll-fade-right {
+  mask-image: linear-gradient(to right, #000 calc(100% - 48px), transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 48px), transparent 100%);
+}
+
+.scroll-fade-left {
+  mask-image: linear-gradient(to right, transparent, #000 48px);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 48px);
+}
+
+.scroll-fade-both {
+  mask-image: linear-gradient(to right, transparent, #000 48px, #000 calc(100% - 48px), transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 48px, #000 calc(100% - 48px), transparent 100%);
+}

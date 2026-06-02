@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit, Inter, Pacifico } from "next/font/google";
 import { CartProvider } from "../context/CartContext";
-import "./globals.css";
+import "../styles/global.css";
 
 const outfit = Outfit({
   variable: "--font-outfit",

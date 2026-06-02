@@ -282,23 +282,58 @@ export const PromoSection: React.FC = () => {
   };
 
   return (
-    <section className="relative bg-[#ff2a14] py-28 px-4 overflow-hidden select-none flex flex-col items-center justify-center">
+    <section className="relative bg-[#0c0c0e] py-28 px-4 overflow-hidden select-none flex flex-col items-center justify-center border-t-2 border-b-2 border-zinc-900">
       
-      {/* Center cream top bun banner matching layout */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[92%] max-w-6xl h-64 md:h-[350px] bg-[#faf6ed] z-0 rounded-t-[40px] rounded-b-[100px] md:rounded-b-[160px] shadow-[0_10px_30px_rgba(0,0,0,0.15)] border-b border-black/5">
+      {/* Glowing Neon ambient backdrops */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#ff2a14]/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#fbbf24]/10 rounded-full blur-[120px] pointer-events-none" />
+
+      {/* Industrial Grid Mesh Background */}
+      <div className="absolute inset-0 opacity-[0.06] pointer-events-none" style={{
+        backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px), radial-gradient(#ffffff 1px, transparent 1px)',
+        backgroundSize: '24px 24px',
+        backgroundPosition: '0 0, 12px 12px'
+      }} />
+
+      <style>{`
+        @keyframes marquee {
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          display: inline-block;
+          animation: marquee 25s linear infinite;
+        }
+        @keyframes flicker {
+          0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+            text-shadow: 0 0 5px #fff, 0 0 10px #ff2a14, 0 0 20px #ff2a14, 0 0 40px #ff2a14;
+            opacity: 1;
+          }
+          20%, 24%, 55% {
+            text-shadow: none;
+            opacity: 0.8;
+          }
+        }
+        .neon-flicker {
+          animation: flicker 4s infinite alternate;
+        }
+      `}</style>
+
+      {/* Center dark industrial neon banner matching layout */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[92%] max-w-6xl h-64 md:h-[350px] bg-[#121214] z-0 rounded-t-[40px] rounded-b-[100px] md:rounded-b-[160px] shadow-[0_10px_30px_rgba(0,0,0,0.5),0_0_40px_rgba(255,42,20,0.15)] border-b-2 border-zinc-800">
         {/* Left Seeds (4 seeds in arched positions) */}
         <div className="absolute left-[10%] top-[15%] flex space-x-3 md:space-x-5 pointer-events-none">
-          <div className="w-2 md:w-3 h-5 md:h-7 bg-[#ff2a14] rounded-full rotate-[-40deg]" />
-          <div className="w-2 md:w-3 h-5 md:h-7 bg-[#ff2a14] rounded-full rotate-[-15deg]" />
-          <div className="w-2 md:w-3 h-5 md:h-7 bg-[#ff2a14] rounded-full rotate-[15deg]" />
-          <div className="w-2 md:w-3 h-5 md:h-7 bg-[#ff2a14] rounded-full rotate-[40deg]" />
+          <div className="w-2 md:w-3 h-5 md:h-7 bg-[#ff2a14] rounded-full rotate-[-40deg] shadow-[0_0_8px_#ff2a14]" />
+          <div className="w-2 md:w-3 h-5 md:h-7 bg-[#ff2a14] rounded-full rotate-[-15deg] shadow-[0_0_8px_#ff2a14]" />
+          <div className="w-2 md:w-3 h-5 md:h-7 bg-[#ff2a14] rounded-full rotate-[15deg] shadow-[0_0_8px_#ff2a14]" />
+          <div className="w-2 md:w-3 h-5 md:h-7 bg-[#ff2a14] rounded-full rotate-[40deg] shadow-[0_0_8px_#ff2a14]" />
         </div>
 
         {/* Right Seeds (3 seeds in arched positions) */}
         <div className="absolute right-[10%] top-[15%] flex space-x-3 md:space-x-5 pointer-events-none">
-          <div className="w-2 md:w-3 h-5 md:h-7 bg-[#ff2a14] rounded-full rotate-[-30deg]" />
-          <div className="w-2 md:w-3 h-5 md:h-7 bg-[#ff2a14] rounded-full rotate-[0deg]" />
-          <div className="w-2 md:w-3 h-5 md:h-7 bg-[#ff2a14] rounded-full rotate-[30deg]" />
+          <div className="w-2 md:w-3 h-5 md:h-7 bg-[#fbbf24] rounded-full rotate-[-30deg] shadow-[0_0_8px_#fbbf24]" />
+          <div className="w-2 md:w-3 h-5 md:h-7 bg-[#fbbf24] rounded-full rotate-[0deg] shadow-[0_0_8px_#fbbf24]" />
+          <div className="w-2 md:w-3 h-5 md:h-7 bg-[#fbbf24] rounded-full rotate-[30deg] shadow-[0_0_8px_#fbbf24]" />
         </div>
       </div>
 
@@ -307,16 +342,16 @@ export const PromoSection: React.FC = () => {
         
         {/* Cartoon sunglasses burger sticker (Left) */}
         <div className="absolute left-4 md:left-[15%] top-[80px] md:top-[130px] z-20 transform -rotate-12 hover:rotate-0 transition-transform duration-300 pointer-events-auto hidden md:block">
-          <div className="bg-white border-[3px] border-black rounded-full w-28 h-28 md:w-36 md:h-36 shadow-[5px_5px_0px_#000] relative flex items-center justify-center select-none">
+          <div className="bg-[#121214] border-[3px] border-zinc-800 rounded-full w-28 h-28 md:w-36 md:h-36 shadow-[0_0_15px_rgba(251,191,36,0.15)] relative flex items-center justify-center select-none">
             {/* Inner red ring */}
-            <div className="absolute border border-[#ff2a14] rounded-full w-[90%] h-[90%] pointer-events-none" />
+            <div className="absolute border border-[#ff2a14]/30 rounded-full w-[90%] h-[90%] pointer-events-none" />
             
             {/* Curved text along circular path */}
             <svg className="absolute w-full h-full animate-[spin_20s_linear_infinite] hover:[animation-play-state:paused]" viewBox="0 0 100 100">
               <defs>
                 <path id="textPath" d="M 12,50 A 38,38 0 1,1 88,50" fill="none" />
               </defs>
-              <text className="font-sans font-black uppercase text-[6px] md:text-[6.5px] fill-[#ff2a14] tracking-[0.08em]">
+              <text className="font-sans font-black uppercase text-[6px] md:text-[6.5px] fill-[#fbbf24] tracking-[0.08em]">
                 <textPath href="#textPath" startOffset="50%" textAnchor="middle">
                   SMASH, EAT & REPEAT
                 </textPath>
@@ -332,7 +367,7 @@ export const PromoSection: React.FC = () => {
 
         {/* Smiling outline burger stick sticker (Right) */}
         <div className="absolute right-4 md:right-[15%] top-[70px] md:top-[120px] z-20 transform rotate-12 hover:rotate-0 transition-transform duration-300 pointer-events-auto hidden md:block">
-          <div className="bg-white border-[3px] border-black rounded-3xl p-3 shadow-[5px_5px_0px_#000] flex flex-col items-center justify-center select-none w-24 h-24 md:w-32 md:h-32">
+          <div className="bg-[#121214] border-[3px] border-zinc-800 rounded-3xl p-3 shadow-[0_0_15px_rgba(255,42,20,0.15)] flex flex-col items-center justify-center select-none w-24 h-24 md:w-32 md:h-32">
             <CartoonBurgerRight />
           </div>
         </div>
@@ -341,41 +376,41 @@ export const PromoSection: React.FC = () => {
         <div className="relative w-full flex flex-col items-center justify-center mt-12 md:mt-20">
           
           <h1 
-            className="absolute top-[-10%] md:top-[-20%] font-pacifico text-[#faf6ed] text-2xl sm:text-4xl md:text-5xl lg:text-6xl leading-none select-none pointer-events-none z-10 w-full text-center whitespace-nowrap px-4 cursive-shadow"
+            className="absolute top-[-10%] md:top-[-20%] font-pacifico text-white text-3xl sm:text-5xl md:text-6xl lg:text-7xl leading-none select-none pointer-events-none z-10 w-full text-center whitespace-nowrap px-4 neon-flicker"
             style={{ 
               transform: 'translateY(-50%)'
             }}
           >
-            Best burgers in town 🍔
+            Best burgers in town
           </h1>
 
           {/* Center circular backing and massive juicy burger */}
           <div className="relative w-64 h-64 md:w-80 md:h-80 flex items-center justify-center z-20 my-6">
             {/* Backing red circle */}
-            <div className="absolute inset-0 bg-[#ff2a14] border-[8px] md:border-[12px] border-[#faf6ed] rounded-full shadow-[0_12px_24px_rgba(0,0,0,0.4)] z-0" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle,#ff2a14_0%,#7a0a07_100%)] border-[8px] md:border-[12px] border-[#ff2a14] rounded-full shadow-[0_12px_24px_rgba(0,0,0,0.6),0_0_45px_rgba(255,42,20,0.7)] z-0 animate-pulse" />
             
             {/* Large burger image */}
             <button
               onClick={handlePromoBurgerClick}
-              className="w-[90%] h-[90%] flex items-center justify-center transform hover:scale-105 active:scale-95 duration-300 z-10 cursor-pointer pointer-events-auto filter drop-shadow-[0_20px_25px_rgba(0,0,0,0.6)]"
+              className="w-[90%] h-[90%] flex items-center justify-center transform hover:scale-105 active:scale-95 duration-300 z-10 cursor-pointer pointer-events-auto filter drop-shadow-[0_20px_25px_rgba(0,0,0,0.8)]"
             >
               <img
                 src="/promo_burger.png"
                 alt="Smashed Cheeseburger"
-                className="w-full h-full object-contain animate-pulse"
+                className="w-full h-full object-contain"
               />
             </button>
           </div>
         </div>
 
         {/* Custom Word Interaction Panel: SMASH, EAT & REPEAT */}
-        <div className="mt-8 font-sans font-black text-xl md:text-4xl text-black flex flex-wrap justify-center items-center gap-x-2 md:gap-x-4 tracking-widest uppercase select-none relative z-20">
+        <div className="mt-8 font-sans font-black text-xl md:text-4xl text-white/90 flex flex-wrap justify-center items-center gap-x-2 md:gap-x-4 tracking-widest uppercase select-none relative z-20">
           <span className="pointer-events-none select-none">•</span>
 
           {/* 1. SMASH (Blast Letters) */}
           <span 
             onMouseEnter={handleSmashHover}
-            className="cursor-pointer select-none inline-flex items-center hover:text-amber-400 transition-colors duration-200 relative"
+            className="cursor-pointer select-none inline-flex items-center hover:text-amber-400 transition-colors duration-200 relative text-white"
           >
             {SMASH_CONFIGS.map((cfg, idx) => (
               <span
@@ -427,7 +462,7 @@ export const PromoSection: React.FC = () => {
           >
             {/* The EAT text, clipped when bitten */}
             <span 
-              className="relative z-10 block transition-colors select-none text-black hover:text-amber-400"
+              className="relative z-10 block transition-colors select-none text-white hover:text-amber-400"
               style={{ 
                 clipPath: eatState === 'bitten' 
                   ? 'polygon(0% 0%, 45% 0%, 42% 5%, 38% 12%, 37% 20%, 39% 27%, 43% 30%, 40% 35%, 34% 42%, 33% 50%, 35% 58%, 42% 60%, 39% 65%, 35% 72%, 34% 80%, 36% 87%, 45% 90%, 50% 100%, 0% 100%)' 
@@ -488,7 +523,7 @@ export const PromoSection: React.FC = () => {
           {/* 3. REPEAT (Fly Away and Return) */}
           <span 
             onMouseEnter={handleRepeatHover}
-            className={`cursor-pointer select-none inline-block transition-all hover:text-amber-400 ${
+            className={`cursor-pointer select-none inline-block transition-all text-white hover:text-amber-400 ${
               repeatActive ? 'animate-fly-around pointer-events-none' : ''
             }`}
           >
