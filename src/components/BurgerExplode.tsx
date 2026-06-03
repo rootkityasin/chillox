@@ -94,9 +94,9 @@ export const BurgerExplode: React.FC = () => {
           className="absolute left-[5%] top-1/2 -translate-y-1/2 select-none pointer-events-none z-10 hidden md:block"
         >
           <span
-            className="text-[6.5vw] font-black leading-none uppercase tracking-widest text-[#ff2a14]/20 block"
+            className="text-[4.2vw] font-black leading-none uppercase tracking-widest text-[#ff2a14]/20 block"
             style={{
-              WebkitTextStroke: '1.5px rgba(255,42,20,0.3)',
+              WebkitTextStroke: '1px rgba(255,42,20,0.2)',
               writingMode: 'vertical-rl',
               textOrientation: 'mixed',
               whiteSpace: 'nowrap',
@@ -111,9 +111,9 @@ export const BurgerExplode: React.FC = () => {
           className="absolute right-[5%] top-1/2 -translate-y-1/2 select-none pointer-events-none z-10 hidden md:block"
         >
           <span
-            className="text-[6.5vw] font-black leading-none uppercase tracking-widest text-[#ff2a14]/20 block"
+            className="text-[4.2vw] font-black leading-none uppercase tracking-widest text-[#ff2a14]/20 block"
             style={{
-              WebkitTextStroke: '1.5px rgba(255,42,20,0.3)',
+              WebkitTextStroke: '1px rgba(255,42,20,0.2)',
               writingMode: 'vertical-rl',
               textOrientation: 'mixed',
               whiteSpace: 'nowrap',
