@@ -29,11 +29,11 @@ export const HeroSection: React.FC = () => {
   const sceneOpacity = useTransform(smoothProgress, [0.82, 1], [1, 0.58]);
 
   // Background side text shifts and fades driven by the smoothed progress
-  const leftTextOpacity = useTransform(smoothProgress, [0, 0.25], [0.2, 0]);
-  const leftTextX = useTransform(smoothProgress, [0, 0.25], [0, -50]);
+  const leftTextOpacity = useTransform(smoothProgress, [0, 0.35], [0.7, 0]);
+  const leftTextX = useTransform(smoothProgress, [0, 0.35], [0, -50]);
   
-  const rightTextOpacity = useTransform(smoothProgress, [0, 0.25], [0.2, 0]);
-  const rightTextX = useTransform(smoothProgress, [0, 0.25], [0, 50]);
+  const rightTextOpacity = useTransform(smoothProgress, [0, 0.35], [0.7, 0]);
+  const rightTextX = useTransform(smoothProgress, [0, 0.35], [0, 50]);
 
   // CTA button fade-out and slide-down at the end driven by the smoothed progress
   const btnOpacity = useTransform(smoothProgress, [0, 0.8, 0.92], [1, 1, 0]);
@@ -101,9 +101,9 @@ export const HeroSection: React.FC = () => {
           className="absolute left-[5%] top-1/2 -translate-y-1/2 select-none pointer-events-none z-10 hidden md:block"
         >
           <span
-            className="text-[4.2vw] font-black leading-none uppercase tracking-widest text-[#ff2a14]/20 block"
+            className="text-[4.2vw] font-black leading-none uppercase tracking-widest text-[#ff2a14]/35 block"
             style={{
-              WebkitTextStroke: '1px rgba(255,42,20,0.2)',
+              WebkitTextStroke: '1.2px rgba(255,42,20,0.4)',
               writingMode: 'vertical-rl',
               textOrientation: 'mixed',
               whiteSpace: 'nowrap',
@@ -118,9 +118,9 @@ export const HeroSection: React.FC = () => {
           className="absolute right-[5%] top-1/2 -translate-y-1/2 select-none pointer-events-none z-10 hidden md:block"
         >
           <span
-            className="text-[4.2vw] font-black leading-none uppercase tracking-widest text-[#ff2a14]/20 block"
+            className="text-[4.2vw] font-black leading-none uppercase tracking-widest text-[#ff2a14]/35 block"
             style={{
-              WebkitTextStroke: '1px rgba(255,42,20,0.2)',
+              WebkitTextStroke: '1.2px rgba(255,42,20,0.4)',
               writingMode: 'vertical-rl',
               textOrientation: 'mixed',
               whiteSpace: 'nowrap',
