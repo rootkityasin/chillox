@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { motion, useScroll, useMotionValueEvent, useTransform } from 'framer-motion';
+import { motion, useScroll, useMotionValueEvent, useTransform, useSpring } from 'framer-motion';
 import { useCart } from '../context/CartContext';
 import FrameSequenceBackground, { FRAME_COUNT } from './hero/FrameSequenceBackground';
 import ScrollCategoryText from './hero/ScrollCategoryText';
@@ -16,23 +16,30 @@ export const BurgerExplode: React.FC = () => {
     offset: ['start start', 'end end'],
   });
 
-  // Transitions for the sticky scene wrapper
-  const sceneY = useTransform(scrollYProgress, [0.72, 1], [0, -90]);
-  const sceneScale = useTransform(scrollYProgress, [0.72, 1], [1, 1.08]);
-  const sceneOpacity = useTransform(scrollYProgress, [0.82, 1], [1, 0.58]);
+  // Create a spring-smoothed scroll progress value to give a "lubricated", fluid movement feel
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 28,
+    mass: 0.15
+  });
 
-  // Background side text shifts and fades
-  const leftTextOpacity = useTransform(scrollYProgress, [0, 0.25], [0.2, 0]);
-  const leftTextX = useTransform(scrollYProgress, [0, 0.25], [0, -50]);
+  // Transitions for the sticky scene wrapper driven by the smoothed progress
+  const sceneY = useTransform(smoothProgress, [0.72, 1], [0, -90]);
+  const sceneScale = useTransform(smoothProgress, [0.72, 1], [1, 1.08]);
+  const sceneOpacity = useTransform(smoothProgress, [0.82, 1], [1, 0.58]);
+
+  // Background side text shifts and fades driven by the smoothed progress
+  const leftTextOpacity = useTransform(smoothProgress, [0, 0.25], [0.2, 0]);
+  const leftTextX = useTransform(smoothProgress, [0, 0.25], [0, -50]);
   
-  const rightTextOpacity = useTransform(scrollYProgress, [0, 0.25], [0.2, 0]);
-  const rightTextX = useTransform(scrollYProgress, [0, 0.25], [0, 50]);
+  const rightTextOpacity = useTransform(smoothProgress, [0, 0.25], [0.2, 0]);
+  const rightTextX = useTransform(smoothProgress, [0, 0.25], [0, 50]);
 
-  // CTA button fade-out and slide-down at the end
-  const btnOpacity = useTransform(scrollYProgress, [0, 0.8, 0.92], [1, 1, 0]);
-  const btnY = useTransform(scrollYProgress, [0, 0.8, 0.92], [0, 0, 45]);
+  // CTA button fade-out and slide-down at the end driven by the smoothed progress
+  const btnOpacity = useTransform(smoothProgress, [0, 0.8, 0.92], [1, 1, 0]);
+  const btnY = useTransform(smoothProgress, [0, 0.8, 0.92], [0, 0, 45]);
 
-  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+  useMotionValueEvent(smoothProgress, 'change', (latest) => {
     const nextFrame = Math.min(
       FRAME_COUNT,
       Math.max(1, Math.round(latest * (FRAME_COUNT - 1)) + 1)
@@ -82,7 +89,7 @@ export const BurgerExplode: React.FC = () => {
         <FrameSequenceBackground currentFrame={frame} />
 
         {/* Dynamic Category Text Taglines */}
-        <ScrollCategoryText scrollYProgress={scrollYProgress} />
+        <ScrollCategoryText scrollYProgress={smoothProgress} />
 
         {/* Subtle Neo-Brutalist Grid and Shadow Overlays */}
         <div className="pointer-events-none absolute inset-0 z-[15] bg-[radial-gradient(circle_at_top,_rgba(255,198,7,0.08),_transparent_30%),linear-gradient(180deg,_rgba(0,0,0,0.15)_0%,_rgba(0,0,0,0.3)_52%,_rgba(0,0,0,0.6)_100%)]" />
