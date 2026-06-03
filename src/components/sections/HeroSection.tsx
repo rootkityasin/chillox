@@ -2,11 +2,11 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useMotionValueEvent, useTransform, useSpring } from 'framer-motion';
-import { useCart } from '../context/CartContext';
-import FrameSequenceBackground, { FRAME_COUNT } from './hero/FrameSequenceBackground';
-import ScrollCategoryText from './hero/ScrollCategoryText';
+import { useCart } from '../../context/CartContext';
+import FrameSequenceBackground, { FRAME_COUNT } from '../hero/FrameSequenceBackground';
+import ScrollCategoryText from '../hero/ScrollCategoryText';
 
-export const BurgerExplode: React.FC = () => {
+export const HeroSection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { setActiveSection } = useCart();
   const [frame, setFrame] = useState(1);
@@ -148,4 +148,4 @@ export const BurgerExplode: React.FC = () => {
   );
 };
 
-export default BurgerExplode;
+export default HeroSection;

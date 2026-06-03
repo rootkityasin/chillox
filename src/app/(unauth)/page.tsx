@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useCart } from '@/context/CartContext';
-import BurgerExplode from '@/components/BurgerExplode';
+import HeroSection from '@/components/sections/HeroSection';
 import PromoSection from '@/components/PromoSection';
 import SocialFeed from '@/components/SocialFeed';
 import MenuSection from '@/components/MenuSection';
@@ -17,7 +17,7 @@ export default function Home() {
     <>
       {/* Section 1: Hero Exploding Burger Scroll Section */}
       <div id="home" className="w-full">
-        <BurgerExplode />
+        <HeroSection />
       </div>
 
       {/* Section 2: Promo Banner (Smash, Eat & Repeat) */}
