@@ -27,10 +27,10 @@ export const ScrollCategoryText: React.FC<ScrollCategoryTextProps> = ({ scrollYP
         style={{ opacity: opacity1, y: y1 }}
         className="absolute flex flex-col items-center px-4"
       >
-        <span className="text-amber-400 font-extrabold text-xs sm:text-sm md:text-base tracking-[0.3em] uppercase mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] text-center">
+        <span className="text-amber-400 font-extrabold text-xs sm:text-sm md:text-base tracking-[0.3em] uppercase mb-2 text-center">
           CHILLOX SIGNATURE
         </span>
-        <h2 className="text-white font-black text-4xl sm:text-5xl md:text-7xl leading-none uppercase tracking-tighter text-center drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
+        <h2 className="text-white font-black text-4xl sm:text-5xl md:text-7xl leading-none uppercase tracking-tighter text-center">
           SMASHED BEEF
         </h2>
       </motion.div>
@@ -40,10 +40,10 @@ export const ScrollCategoryText: React.FC<ScrollCategoryTextProps> = ({ scrollYP
         style={{ opacity: opacity2, y: y2 }}
         className="absolute flex flex-col items-center px-4"
       >
-        <span className="text-[#ff2a14] font-extrabold text-xs sm:text-sm md:text-base tracking-[0.3em] uppercase mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] text-center">
+        <span className="text-[#ff2a14] font-extrabold text-xs sm:text-sm md:text-base tracking-[0.3em] uppercase mb-2 text-center">
           CHEESE BLAST
         </span>
-        <h2 className="text-white font-black text-4xl sm:text-5xl md:text-7xl leading-none uppercase tracking-tighter text-center drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
+        <h2 className="text-white font-black text-4xl sm:text-5xl md:text-7xl leading-none uppercase tracking-tighter text-center">
           LIQUID CHEESE
         </h2>
       </motion.div>
@@ -53,10 +53,10 @@ export const ScrollCategoryText: React.FC<ScrollCategoryTextProps> = ({ scrollYP
         style={{ opacity: opacity3, y: y3 }}
         className="absolute flex flex-col items-center px-4"
       >
-        <span className="text-amber-400 font-extrabold text-xs sm:text-sm md:text-base tracking-[0.3em] uppercase mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] text-center">
+        <span className="text-amber-400 font-extrabold text-xs sm:text-sm md:text-base tracking-[0.3em] uppercase mb-2 text-center">
           SPICY SENSATION
         </span>
-        <h2 className="text-white font-black text-4xl sm:text-5xl md:text-7xl leading-none uppercase tracking-tighter text-center drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
+        <h2 className="text-white font-black text-4xl sm:text-5xl md:text-7xl leading-none uppercase tracking-tighter text-center">
           NAGA HEAT
         </h2>
       </motion.div>
