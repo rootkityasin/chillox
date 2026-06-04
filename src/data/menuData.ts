@@ -17,7 +17,7 @@ export const menuItems: MenuItem[] = [
     price: 235,
     category: 'beef',
     description: 'Juicy beef patty grilled to perfection with onions, pickles, and our signature sauce.',
-    image: '/assets/menu/classic_beef.png',
+    image: '/assets/menu/burger_all.png',
     tags: ['Signature'],
     calories: 450
   },
@@ -27,7 +27,7 @@ export const menuItems: MenuItem[] = [
     price: 275,
     category: 'beef',
     description: 'Our classic beef burger upgraded with a slice of melted cheddar cheese.',
-    image: '/assets/menu/classic_beef.png',
+    image: '/assets/menu/burger_all.png',
     tags: ['Premium Choice'],
     calories: 562
   },
@@ -37,7 +37,7 @@ export const menuItems: MenuItem[] = [
     price: 295,
     category: 'beef',
     description: 'Beef patty topped with melted cheddar, crispy onion rings, and a smokey BBQ glaze.',
-    image: '/assets/menu/bbq_beef.png',
+    image: '/assets/menu/burger_all.png',
     tags: ['Smoked Oak'],
     calories: 610
   },
@@ -47,7 +47,7 @@ export const menuItems: MenuItem[] = [
     price: 450,
     category: 'beef',
     description: 'Massive double-patty beef burger with double cheese, lettuce, and secret house sauce.',
-    image: '/assets/menu/hero_burger.png',
+    image: '/assets/menu/burger_all.png',
     tags: ['Grand Giganto', 'Hearty Selection'],
     calories: 890
   },
@@ -57,7 +57,7 @@ export const menuItems: MenuItem[] = [
     price: 595,
     category: 'beef',
     description: 'Triple beef patties layered with three slices of cheese, bacon, and special dressings.',
-    image: '/assets/menu/hero_burger.png',
+    image: '/assets/menu/burger_all.png',
     tags: ['Chef\'s Masterpiece', 'Gourmet Feast'],
     calories: 1120
   },
@@ -69,7 +69,7 @@ export const menuItems: MenuItem[] = [
     price: 235,
     category: 'chicken',
     description: 'Crispy or grilled chicken breast patty with fresh lettuce and mayo.',
-    image: '/assets/menu/hero_burger.png',
+    image: '/assets/menu/burger_all.png',
     calories: 420
   },
   {
@@ -78,7 +78,7 @@ export const menuItems: MenuItem[] = [
     price: 275,
     category: 'chicken',
     description: 'Crispy chicken patty with melted cheddar cheese, pickles, and signature house sauce.',
-    image: '/assets/menu/hero_burger.png',
+    image: '/assets/menu/burger_all.png',
     tags: ['Premium Choice'],
     calories: 530
   },
@@ -88,7 +88,7 @@ export const menuItems: MenuItem[] = [
     price: 295,
     category: 'chicken',
     description: 'Crispy chicken patty glazed in BBQ sauce with melted cheese and fresh greens.',
-    image: '/assets/menu/hero_burger.png',
+    image: '/assets/menu/burger_all.png',
     calories: 580
   },
   {
@@ -97,7 +97,7 @@ export const menuItems: MenuItem[] = [
     price: 350,
     category: 'chicken',
     description: 'A chicken burger filled with a liquid-cheese center that explodes with flavor in every bite.',
-    image: '/assets/menu/hero_burger.png',
+    image: '/assets/menu/burger_all.png',
     tags: ['Cheese Lava', 'Spicy Naga'],
     calories: 720
   },
@@ -107,7 +107,7 @@ export const menuItems: MenuItem[] = [
     price: 450,
     category: 'chicken',
     description: 'Double crispy chicken patties with double cheese, salad, and dynamic house sauce.',
-    image: '/assets/menu/hero_burger.png',
+    image: '/assets/menu/burger_all.png',
     tags: ['Grand Giganto'],
     calories: 840
   },
@@ -119,7 +119,7 @@ export const menuItems: MenuItem[] = [
     price: 295,
     category: 'fish',
     description: 'Crispy Dory Fish fillet layered with fresh lettuce and tartar sauce, all tucked in a soft bun.',
-    image: '/assets/menu/fish_burger.png',
+    image: '/assets/menu/burger_all.png',
     tags: ['Crispy Fish', 'Tartar Delight'],
     calories: 480
   },
@@ -141,7 +141,7 @@ export const menuItems: MenuItem[] = [
     price: 425,
     category: 'smasher',
     description: 'Double smashed beef patties with caramelized onions, swiss cheese, and a rich truffle aioli.',
-    image: '/assets/menu/hero_burger.png',
+    image: '/assets/menu/burger_all.png',
     tags: ['Gourmet Select', 'Artisan Edition'],
     calories: 680
   },
@@ -151,7 +151,7 @@ export const menuItems: MenuItem[] = [
     price: 450,
     category: 'smasher',
     description: 'Smashed beef patties topped with sautéed shiitake mushrooms, melted cheese, and creamy sauce.',
-    image: '/assets/menu/shiitake_smasher.jpg',
+    image: '/assets/menu/burger_all.png',
     tags: ['Shiitake Infused'],
     calories: 710
   },
@@ -161,7 +161,7 @@ export const menuItems: MenuItem[] = [
     price: 495,
     category: 'smasher',
     description: 'Smashed beef patties, premium Canadian maple bacon, cheddar cheese, and a smoky sauce.',
-    image: '/assets/menu/bacon_smasher.jpg',
+    image: '/assets/menu/burger_all.png',
     tags: ['Maple Smoked Bacon'],
     calories: 790
   },
@@ -173,7 +173,7 @@ export const menuItems: MenuItem[] = [
     price: 325,
     category: 'rice-bowls',
     description: 'Special rice served with a delicious lemon cream chicken and a fried egg on top.',
-    image: '/assets/menu/continental_fusion.png',
+    image: '/assets/menu/burger_all.png',
     tags: ['Lemon Cream', 'Fusion Delight'],
     calories: 520
   },
@@ -183,7 +183,7 @@ export const menuItems: MenuItem[] = [
     price: 325,
     category: 'rice-bowls',
     description: 'Tom Yum rice paired with Kung Pao chicken and topped with a fried egg and black sesame seeds.',
-    image: '/assets/menu/pan_asian_mashup.png',
+    image: '/assets/menu/burger_all.png',
     tags: ['Tom Yum', 'Spicy Kung Pao'],
     calories: 580
   },
@@ -195,7 +195,7 @@ export const menuItems: MenuItem[] = [
     price: 135,
     category: 'fried-chicken',
     description: 'Crispy, crunchy, and juicy single piece of fried chicken prepared with secret herbs.',
-    image: '/assets/menu/burger_exploded.png',
+    image: '/assets/menu/burger_all.png',
     calories: 220
   },
   {
@@ -204,7 +204,7 @@ export const menuItems: MenuItem[] = [
     price: 260,
     category: 'fried-chicken',
     description: 'Two pieces of our signature hot and crispy golden fried chicken.',
-    image: '/assets/menu/burger_exploded.png',
+    image: '/assets/menu/burger_all.png',
     tags: ['Sharing Selection'],
     calories: 440
   },
@@ -214,7 +214,7 @@ export const menuItems: MenuItem[] = [
     price: 515,
     category: 'fried-chicken',
     description: 'Four pieces of hot, crunchy fried chicken, perfect for sharing.',
-    image: '/assets/menu/burger_exploded.png',
+    image: '/assets/menu/burger_all.png',
     calories: 880
   },
   {
@@ -223,7 +223,7 @@ export const menuItems: MenuItem[] = [
     price: 1150,
     category: 'fried-chicken',
     description: 'A massive bucket of 9 golden crispy chicken pieces, for the ultimate gathering.',
-    image: '/assets/menu/burger_exploded.png',
+    image: '/assets/menu/burger_all.png',
     tags: ['Grand Banquet'],
     calories: 1980
   },
@@ -235,7 +235,7 @@ export const menuItems: MenuItem[] = [
     price: 90,
     category: 'sides',
     description: 'Crispy salted golden french fries. Simple and delicious.',
-    image: '/assets/menu/burger_exploded.png',
+    image: '/assets/menu/burger_all.png',
     calories: 310
   },
   {
@@ -244,7 +244,7 @@ export const menuItems: MenuItem[] = [
     price: 175,
     category: 'sides',
     description: 'Crispy, seasoned potato wedges served with a side of garlic mayo sauce.',
-    image: '/assets/menu/potato_wedges.png',
+    image: '/assets/menu/burger_all.png',
     calories: 380
   },
   {
@@ -253,7 +253,7 @@ export const menuItems: MenuItem[] = [
     price: 235,
     category: 'sides',
     description: 'Crispy, bite-sized pieces of seasoned dory fish deep-fried to golden perfection.',
-    image: '/assets/menu/fish_tots.png',
+    image: '/assets/menu/burger_all.png',
     tags: ['Crispy Fish', 'Bite-Sized'],
     calories: 320
   },
@@ -263,7 +263,7 @@ export const menuItems: MenuItem[] = [
     price: 195,
     category: 'sides',
     description: 'Tender chicken strips breaded and fried till golden brown. Served with dipping sauce.',
-    image: '/assets/menu/burger_exploded.png',
+    image: '/assets/menu/burger_all.png',
     tags: ['Tender Select'],
     calories: 410
   },
@@ -273,7 +273,7 @@ export const menuItems: MenuItem[] = [
     price: 270,
     category: 'sides',
     description: 'Spicy chicken wings tossed in our signature hot glaze.',
-    image: '/assets/menu/burger_exploded.png',
+    image: '/assets/menu/burger_all.png',
     tags: ['Fiery Crisp'],
     calories: 450
   },
@@ -283,7 +283,7 @@ export const menuItems: MenuItem[] = [
     price: 220,
     category: 'sides',
     description: 'Extremely hot and spicy drumettes flavored with authentic Bangladeshi naga chili.',
-    image: '/assets/menu/burger_exploded.png',
+    image: '/assets/menu/burger_all.png',
     tags: ['Explosive Naga'],
     calories: 490
   },
@@ -295,7 +295,7 @@ export const menuItems: MenuItem[] = [
     price: 180,
     category: 'drinks',
     description: 'Rich, thick chocolate shake made with premium ice cream and cocoa powder, topped with whipped cream.',
-    image: '/assets/menu/burger_exploded.png',
+    image: '/assets/menu/burger_all.png',
     tags: ['Signature Shake'],
     calories: 520
   },
@@ -305,7 +305,7 @@ export const menuItems: MenuItem[] = [
     price: 190,
     category: 'drinks',
     description: 'Creamy vanilla milkshake blended with Oreo cookie chunks and chocolate syrup.',
-    image: '/assets/menu/burger_exploded.png',
+    image: '/assets/menu/burger_all.png',
     tags: ['Connoisseur Choice'],
     calories: 540
   },
@@ -315,7 +315,7 @@ export const menuItems: MenuItem[] = [
     price: 185,
     category: 'drinks',
     description: 'Sweet and refreshing milkshake flavored with real strawberry syrup and ice cream.',
-    image: '/assets/menu/burger_exploded.png',
+    image: '/assets/menu/burger_all.png',
     calories: 480
   },
   {
@@ -324,7 +324,7 @@ export const menuItems: MenuItem[] = [
     price: 150,
     category: 'drinks',
     description: 'Delicious layers of red velvet sponge and cream cheese frosting in a reusable glass jar.',
-    image: '/assets/menu/burger_exploded.png',
+    image: '/assets/menu/burger_all.png',
     tags: ['Velvet Sugar'],
     calories: 380
   },
@@ -334,7 +334,7 @@ export const menuItems: MenuItem[] = [
     price: 99,
     category: 'drinks',
     description: 'Sweet and refreshing lemon-flavored iced tea served with a slice of fresh lemon.',
-    image: '/assets/menu/iced_lemon_tea.png',
+    image: '/assets/menu/burger_all.png',
     tags: ['Refreshing', 'Citrus Blast'],
     calories: 120
   }
