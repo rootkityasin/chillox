@@ -1,23 +1,6 @@
 import type { Metadata } from "next";
-import { Outfit, Inter, Pacifico } from "next/font/google";
 import { CartProvider } from "../context/CartContext";
 import "../styles/global.css";
-
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
-
-const pacifico = Pacifico({
-  weight: '400',
-  variable: "--font-pacifico",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Chillox | Smashed Burgers, Fried Chicken & Shakes",
@@ -33,7 +16,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${inter.variable} ${pacifico.variable} h-full antialiased`}
+      className="h-full antialiased"
     >
       <body className="min-h-full bg-black font-sans selection:bg-amber-400 selection:text-red-950">
         <CartProvider>
